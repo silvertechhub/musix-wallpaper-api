@@ -5,14 +5,20 @@ const session = require('cookie-session');
 const csurf = require('csurf');
 const axios = require("axios")
 const jwt = require("jsonwebtoken")
-const querystring = require("querystring")
+const querystring = require("querystring");
+const path = require("path");
 
 const app = express();
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.send("hello niggas in paris")
-})
+if(process.env.NODE_ENV === 'production'){
+
+  app.use(express.static(path.resolve(__dirname, "./music-wallpaper/build")))
+
+  app.get('*', (req,res) => {
+      res.sendFile(path.resolve(__dirname, './music-wallpaper/build', 'index.html'))
+  })
+}
 
 const generateRandomString = length => {
   let text = '';
