@@ -8,6 +8,11 @@ export default function Login() {
   const [token, setToken] = useState(null)
   const [profile, setProfile] = useState('')
   const [topTracks, setTopTracks] = useState([])
+  const LOGIN_URI =
+  process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:8888/login'
+    : 'https://musix-wallpaper.onrender.com/login';
+
   
 
     useEffect(() => {
@@ -44,7 +49,7 @@ export default function Login() {
       <div >
         <h2 className='text-4xl text-left font-extrabold font-display leading-[55px]'>Create unique Music wallpaper based on your Favorite Playlist</h2>
         <div className='my-16 text-center'>
-            <a className='bg-pry  py-3 px-6 rounded-lg text-lg font-bold' href="http://localhost:8888/login">Login with spotify</a>
+            <a className='bg-pry  py-3 px-6 rounded-lg text-lg font-bold' href={LOGIN_URI}>Login with spotify</a>
             <section className='bg-gray-800 my-10 font-basic'>
               <h3 className='text-3xl font-extrabold py-4'>It's Easy to Create</h3>
               <h5 className='text-base'>Follow the steps below and create your music wallpaper using your own playlist</h5>
