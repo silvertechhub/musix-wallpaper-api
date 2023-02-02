@@ -11,14 +11,14 @@ const path = require("path");
 const app = express();
 app.use(cors())
 
-if(process.env.NODE_ENV === 'production'){
+// if(process.env.NODE_ENV === 'production'){
 
-  app.use(express.static(path.resolve(__dirname, "./music-wallpaper/build")))
+//   app.use(express.static(path.resolve(__dirname, "./music-wallpaper/build")))
 
-  app.get('*', (req,res) => {
-      res.sendFile(path.resolve(__dirname, './music-wallpaper/build', 'index.html'))
-  })
-}
+//   app.get('*', (req,res) => {
+//       res.sendFile(path.resolve(__dirname, './music-wallpaper/build', 'index.html'))
+//   })
+// }
 
 const generateRandomString = length => {
   let text = '';
@@ -74,7 +74,7 @@ app.get('/login', function(req, res) {
           refresh_token,
           expires_in
         });
-        res.redirect(`http://localhost:3001/?${queryParams}`)
+        res.redirect(`${process.env.REDRIECT_PAGE}/?${queryParams}`)
        
       }else{
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`)
@@ -97,7 +97,7 @@ app.get('/login', function(req, res) {
       }),
       headers: {
         'content_type':  'application/x-www-form-urlencoded',
-        Authorization: `Basic ${new Buffer.from(`${'e1cb02f5b0fe45b6bc4adf9877ea049a'}:${'b143d1ad4f004178bdf43828dc87a2e8'}`).toString('base64')}`,
+        Authorization: `Basic ${new Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64')}`,
       }
     }).then(response => {
       res.send(response.data)
