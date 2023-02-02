@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .img_header {
+        width: 20%;
+        max-width: 250px;
+        min-width: 120px;
+        margin-right: var(--spacing-lg);
+        box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
+        background-color: var(--dark-grey);
+        border-radius: 50%
+    }
+  }
